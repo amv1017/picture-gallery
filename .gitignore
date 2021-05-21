@@ -1,0 +1,12 @@
+picture-gallery-frontend/node_modules
+picture-gallery-frontend/.pnp
+picture-gallery-frontend/.pnp.js
+picture-gallery-frontend/coverage
+picture-gallery-frontend/.DS_Store
+picture-gallery-frontend/.env.local
+picture-gallery-frontend/.env.development.local
+picture-gallery-frontend/.env.test.local
+picture-gallery-frontend/.env.production.local
+picture-gallery-frontend/npm-debug.log*
+picture-gallery-frontend/yarn-debug.log*
+picture-gallery-frontend/yarn-error.log*
