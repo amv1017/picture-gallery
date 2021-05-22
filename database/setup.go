@@ -8,9 +8,15 @@ import (
 var (
 
 	setup_paintings = []models.Painting {
-		{ Title: "A", Description: "123" },
-		{ Title: "B", Description: "456" },
-		{ Title: "C", Description: "789" },
+		{ Title: "A", Description: "123",
+			// Genre: setup_genre[1]
+		},
+		{ Title: "B", Description: "456",
+			// Genre: setup_genre[0]
+		},
+		{ Title: "C", Description: "789",
+			// Genre: setup_genre[3]
+		},
 	}
 
 	setup_author = []models.Author { 
@@ -18,12 +24,25 @@ var (
 		{ Name: "Bosch", Paintings: setup_paintings[2:] },
 	}
 
+	setup_genre = []models.Genre {
+		{ Title: "P" },
+		{ Title: "N" },
+		{ Title: "L" },
+		{ Title: "T" },
+	}
+
 )
 
 func FillDatabase(db *gorm.DB) {
 
+	for i := range setup_genre {
+		db.Create(&setup_genre[i])
+	}
+
 	for i := range setup_author {
 		db.Create(&setup_author[i])
 	}
+
+
 }
 

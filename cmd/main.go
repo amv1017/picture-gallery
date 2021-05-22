@@ -41,6 +41,7 @@ func main() {
 	
 	db.AutoMigrate(&models.Author{})
 	db.AutoMigrate(&models.Painting{})
+	db.AutoMigrate(&models.Genre{})
 
 	// WARNING: CALL ONLY THE FIRST TIME
 	database.FillDatabase(db)
