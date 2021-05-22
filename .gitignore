@@ -1,3 +1,4 @@
+.env
 picture-gallery-frontend/node_modules
 picture-gallery-frontend/.pnp
 picture-gallery-frontend/.pnp.js
