@@ -10,6 +10,7 @@ var (
 	setup_paintings = []models.Painting {
 		{ Title: "A", Description: "123",
 			// Genre: setup_genre[1]
+			Genre: setup_genre[2],
 		},
 		{ Title: "B", Description: "456",
 			// Genre: setup_genre[0]
@@ -25,19 +26,16 @@ var (
 	}
 
 	setup_genre = []models.Genre {
-		{ Title: "P" },
-		{ Title: "N" },
-		{ Title: "L" },
-		{ Title: "T" },
+		{ Label: "Port" },
+		{ Label: "Natu" },
+		{ Label: "Livi" },
+		{ Label: "Hist" },
 	}
 
 )
 
 func FillDatabase(db *gorm.DB) {
 
-	for i := range setup_genre {
-		db.Create(&setup_genre[i])
-	}
 
 	for i := range setup_author {
 		db.Create(&setup_author[i])
