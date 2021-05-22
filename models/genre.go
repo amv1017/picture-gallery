@@ -2,7 +2,7 @@ package models
 
 type Genre struct {
 	ID		uint	`json:"id" gorm:"primary_key"`
-	GenreId uint	`json:"genreid"`
-	Label	string	`json:"label"`
+	Sign	string	`json:"description" gorm:"primary_key"`
+	Paintings	[]Painting	`json:"paintings" gorm:"many2many:genre_paintings"`
 }
 
