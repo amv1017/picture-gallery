@@ -21,9 +21,7 @@ var (
 )
 
 func FillDatabase(db *gorm.DB) {
-	for i := range setup_paintings {
-		db.Create(&setup_paintings[i])
-	}
+
 	for i := range setup_author {
 		db.Create(&setup_author[i])
 	}
