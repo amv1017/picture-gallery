@@ -1,7 +1,7 @@
 package database
 
 import (
-	"strconv"
+	// "strconv"
 
 	"github.com/amv1017/picture-gallery/models"
 	"gorm.io/gorm"
@@ -12,6 +12,7 @@ var (
 	DB *gorm.DB
 
 	sp = []models.Painting {
+
 		{ // 0
 			Title: "The Rooks Have Come Back", 
 			Description: "The Rooks Have Come Back (1871) is considered by many critics to be the high point in Savrasov’s artistic career. Using a common, even trivial, episode of birds returning home, and an extremely simple landscape, Savrasov emotionally showed the transition of nature from winter to spring. It was a new type of lyrical landscape painting, called later by critics the mood landscape. The painting brought him fame. In 1870, he became a member of the Peredvizhniki group, breaking with government-sponsored academic art.",
@@ -59,6 +60,7 @@ var (
 		},
 
 
+
 		{ // 9
 			Title: "Rider",
 			Description: "The depicted are sisters Giovannina and Amazilia Pacini, the foster daughters of Countess Y.P. Samoilova, with whom Bryullov had a close friendship.What is important in the painting The Rider is not so much the story as the action. The older of the two sisters abruptly stops her excited horse, though she remains absolutely calm. Wild force submitting to fragile beauty is one of the favourite themes of Romanticism. The girl’s face is perfectly beautiful. The Italian type of appearance was considered to be perfect in Bryullov’s day and the artist was delighted to use this to advantage. The refined play of colours, the sparkling fabrics – every detail literally speaks of the grandeur of this best of all possible worlds.",
@@ -102,6 +104,26 @@ var (
 			Description: "Kuzma Sergeevich Petrov-Vodkin was a Russian artist who studied at art school in St Petersburg, after which he went to Moscow and Munich. Petrov-Vodkin’s most famous painting Bathing of a Red Horse 1912 forms part of the permanent collection at Moscow’s Tretyakov State Gallery. The Communists denounced his work but in the 1970’s his literary essays and paintings were rediscovered and there is an entire room at the Russian Museum in St Petersburg dedicated to his paintings.",
 			Url: "https://uploads0.wikiart.org/images/kuzma-petrov-vodkin/bird-cherry-in-a-glass-1932.jpg!Large.jpg",
 		},
+		{ // 17
+			Title: "Cornflowers",
+			Description: "Levitan is known to everyone as the most famous Russian landscape painter. In this picture, we see an image not quite familiar to him – a still life. Nothing distracts the viewer from the spot of meaning: the artist has not created a single detail around a vase with flowers, for which the viewer could catch the eye. All attention is paid to flowers: divinely beautiful cornflowers in their simplicity. Simple wildflowers amaze with their magnificence. It would seem that ordinary cornflowers, the same, similar to each other. But each of this small bouquet of cornflower flower attracts separate attention. Each of them has its own special color. Here the viewer will find bright blue cornflowers, and with a slight shade of purple, and dove, and pink, and even white cornflowers.",
+			Url: "https://uploads1.wikiart.org/images/isaac-levitan/cornflowers-1894.jpg!Large.jpg",
+		},
+		{ // 18
+			Title: "A Bunch of Flowers. Phloxes",
+			Description: "Kramskoy – Russian artist, from all genres, preferred genre and historical painting. Sometimes he painted portraits, criticized other people’s paintings, tried to find such measures by which one could accurately determine the value of objects of art. He fiercely defended the idea that the artist should be not just an observer, but a teacher, and that the pictures should serve a greater purpose than just a reflection of reality. In his opinion, they had to develop morality and offer a person to make a moral choice, had to inculcate taste and reflect deeply folk, national subjects, reminding people who they were and where they came from. The pictures in his world were supposed to be a guide, a light in the dark, and this very striving for light, for freedom, for good, can be seen not only in the works of the artist, but also in his life.",
+			Url: "https://uploads8.wikiart.org/images/ivan-kramskoy/bouquet-of-flowers-1884.jpg!Large.jpg",
+		},
+		{ // 19
+			Title: "Still Life",
+			Description: "Malevich is a famous Russian impressionist, the most famous painting of which 'Black Square' still causes controversy and bewilderment – some see in it a deep deep meaning, others argue with them, speaking of the picture as a meaningless daub. However, before coming to the 'Black Square', symbolizing the end of everything, Malevich spent a long time looking for himself and his style, trying a variety of options. Realism disliked him, classicism seemed boring. He considered senseless to carry life into art, saying that, on the contrary, it should be carried into art, for this is the only way to make it truly beautiful. Therefore, in his quest he turned to impressionism and cubism, but never to realism. He was close to bright colors, strong, harsh emotions, and were not at all near pastoral, tenderness and trembling. He wanted to change his life and wanted to do it through their art.",
+			Url: "https://uploads7.wikiart.org/images/kazimir-malevich/still-life.jpg!Large.jpg",
+		},
+		{ // 20
+			Title: "Apples and Leaves",
+			Description: "When this picture was written, Ilya Repin was at the peak of creativity, he created one masterpiece after another, had a fee, he had a wonderful family, with which he moved to the capital, here he teamed up with the most prominent artists of Russia who met him and his works complacently, exhibited with a cycle of masterfully written portraits, sold his work for good money at that time, acquired new friends in Moscow. Of course, all these circumstances could not but affect the mood of the artist, and he created such an unusual work for himself as 'Apples and Leaves'. Why unusual? Because Ilya Efimovich is a virtuoso of historical and mythological themes, portrait painting, psychological, imbued with feelings and emotions of paintings. Still life was not peculiar to this artist.",
+			Url: "https://uploads4.wikiart.org/images/ilya-repin/apples-and-leaves-1879.jpg!Large.jpg",
+		},
 
 
 	}
@@ -126,7 +148,7 @@ var (
 			},  
 		},
 		{ Name: "Kuzma Petrov-Vodkin", Paintings: []models.Painting{ 
-				
+				sp[16],
 			},  
 		},
 		{ Name: "Ivan Shishkin", Paintings: []models.Painting{ 
@@ -137,6 +159,7 @@ var (
 		{ Name: "Isaac Levitan", Paintings: []models.Painting{ 
 				sp[5],
 				sp[6],
+				sp[17],
 			},  
 		},
 		{ Name: "Arkhip Kuindzhi", Paintings: []models.Painting{ 
@@ -149,6 +172,7 @@ var (
 		},
 		{ Name: "Ivan Kramskoy", Paintings: []models.Painting{ 
 				sp[12],
+				sp[18],
 			},  
 		},
 		{ Name: "Vasily Perov", Paintings: []models.Painting{ 
@@ -158,6 +182,11 @@ var (
 		},
 		{ Name: "Ilya Repin", Paintings: []models.Painting{ 
 				sp[15],
+				sp[20],
+			},  
+		},
+		{ Name: "Kazimir Malevich", Paintings: []models.Painting{ 
+				sp[19],
 			},  
 		},
 
@@ -182,10 +211,24 @@ func FillDatabase() {
 		DB.Create(&sa[i])
 	}
 
-
+/*
 
 	DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[0].ID))+`,'`+sg[0].Sign+`',`+strconv.Itoa(int(1))+`,'`+sp[0].Title+`')`)
 	DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[0].ID))+`,'`+sg[0].Sign+`',`+strconv.Itoa(int(2))+`,'`+sp[1].Title+`')`)
+
+*/
+
+/*
+	for i := 0; i < 9; i++ {
+		DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[0].ID))+`,'`+sg[0].Sign+`',`+strconv.Itoa(int(i+1))+`,'`+sp[i].Title+`')`)
+	}
+*/
+
+
+
+
+
+
 
 
 }
