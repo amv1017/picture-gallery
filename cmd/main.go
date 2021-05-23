@@ -46,16 +46,6 @@ func main() {
 	// database.FillDatabase()
 
 	
-
-
-	/*
-	db.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title)
-	VALUES (3,'Natu',5,'Waterfall')`)
-	*/
-
-
-
-	// Routes
 	router := mux.NewRouter()
 
 	router.HandleFunc("/authors", controllers.GetAllAuthors).Methods("GET")
