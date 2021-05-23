@@ -58,6 +58,8 @@ func main() {
 	router.HandleFunc("/paintings", controllers.CreatePainting).Methods("POST")
 	router.HandleFunc("/painting/{id}", controllers.DeletePainting).Methods("DELETE")
 
+	router.HandleFunc("/genre/{id}", controllers.GetGenre).Methods("GET")
+
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/")))
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
