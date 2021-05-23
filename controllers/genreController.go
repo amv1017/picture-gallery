@@ -9,8 +9,9 @@ import (
 )
 
 type Result struct {
-	PaintingID int
-	PaintingTitle string
+	PaintingID		int		`json:"id"`
+	PaintingTitle	string	`json:"title"`
+	PaintingUrl		string	`json:"url"`
 }
 
 func GetGenre(w http.ResponseWriter, r *http.Request) {
@@ -22,7 +23,7 @@ func GetGenre(w http.ResponseWriter, r *http.Request) {
 
 	var result []Result
 	fmt.Println(params["id"])
-	database.DB.Raw("SELECT painting_id, painting_title FROM genre_paintings WHERE genre_id = "+params["id"]).Scan(&result)
+	database.DB.Raw("SELECT painting_id, painting_title, painting_url FROM genre_paintings WHERE genre_id = "+params["id"]).Scan(&result)
 
 	fmt.Println(result)
 

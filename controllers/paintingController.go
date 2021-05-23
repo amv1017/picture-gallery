@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 	"github.com/amv1017/picture-gallery/database"
@@ -41,13 +40,13 @@ func CreatePainting(w http.ResponseWriter, r *http.Request) {
 	database.DB.Model(&models.Genre{}).First(&genre,"sign",painting.Genre)
 	database.DB.Model(&models.Author{}).First(&author,"name",painting.Author)
 
-	database.DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+
+	database.DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title,painting_url) VALUES (`+
 	strconv.Itoa(int(genre.ID))+`,'`+genre.Sign+`',`+
-	strconv.Itoa(int(painting.ID))+`,'`+painting.Title+`')`)
+	strconv.Itoa(int(painting.ID))+`,'`+painting.Title+`','`+painting.Url+`')`)
 
-	database.DB.Exec(`INSERT INTO public.author_paintings (author_id,author_name,painting_id,painting_title) VALUES (`+
+	database.DB.Exec(`INSERT INTO public.author_paintings (author_id,author_name,painting_id,painting_title,painting_url) VALUES (`+
 	strconv.Itoa(int(author.ID))+`,'`+author.Name+`',`+
-	strconv.Itoa(int(painting.ID))+`,'`+painting.Title+`')`)
+	strconv.Itoa(int(painting.ID))+`,'`+painting.Title+`','`+painting.Url+`')`)
 
 }
 
@@ -55,7 +54,6 @@ func DeletePainting(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var painting models.Painting
 	database.DB.First(&painting, params["id"])
-	fmt.Println(painting)
 
 	var genre models.Genre
 	var author models.Author
