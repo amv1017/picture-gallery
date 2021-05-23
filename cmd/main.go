@@ -1,21 +1,19 @@
 package main
 
 import (
+	"github.com/amv1017/picture-gallery/controllers"
 	"github.com/amv1017/picture-gallery/models"
 	"github.com/amv1017/picture-gallery/database"
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"github.com/joho/godotenv"
+
 	"github.com/gorilla/mux"
-	"gorm.io/gorm"
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-
-var db *gorm.DB
-var err error
 
 func main() {
 	var dotEnv map[string]string
@@ -31,7 +29,7 @@ func main() {
 			" port="+dotEnv["PORT"]+
 			" sslmode=disable"
 
-	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	database.DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
 	} else {
@@ -39,100 +37,39 @@ func main() {
 	}
 
 	
-	db.AutoMigrate(&models.Author{})
-	db.AutoMigrate(&models.Painting{})
-	db.AutoMigrate(&models.Genre{})
+	database.DB.AutoMigrate(&models.Author{})
+	database.DB.AutoMigrate(&models.Painting{})
+	database.DB.AutoMigrate(&models.Genre{})
 
 	// WARNING: CALL ONLY THE FIRST TIME
-	database.FillDatabase(db)
+	// database.FillDatabase(db)
+
+	
+	var genre models.Genre
+	database.DB.First(&genre).Where("sign","Port")
+	fmt.Println(genre)
+
+	/*
+	db.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title)
+	VALUES (3,'Natu',5,'Waterfall')`)
+	*/
+
+
 
 	// Routes
 	router := mux.NewRouter()
 
-	router.HandleFunc("/authors", getAllAuthors).Methods("GET")
-	router.HandleFunc("/author/{id}", getAuthor).Methods("GET")
-	router.HandleFunc("/authors", createAuthor).Methods("POST")
-	router.HandleFunc("/author/{id}", deleteAuthor).Methods("DELETE")
+	router.HandleFunc("/authors", controllers.GetAllAuthors).Methods("GET")
+	router.HandleFunc("/author/{id}", controllers.GetAuthor).Methods("GET")
+	router.HandleFunc("/authors", controllers.CreateAuthor).Methods("POST")
+	router.HandleFunc("/author/{id}", controllers.DeleteAuthor).Methods("DELETE")
 
-	router.HandleFunc("/paintings", getAllPaintings).Methods("GET")
-	router.HandleFunc("/painting/{id}", getPainting).Methods("GET")
-	router.HandleFunc("/paintings", createPainting).Methods("POST")
-	router.HandleFunc("/painting/{id}", deletePainting).Methods("DELETE")
+	router.HandleFunc("/paintings", controllers.GetAllPaintings).Methods("GET")
+	router.HandleFunc("/painting/{id}", controllers.GetPainting).Methods("GET")
+	router.HandleFunc("/paintings", controllers.CreatePainting).Methods("POST")
+	router.HandleFunc("/painting/{id}", controllers.DeletePainting).Methods("DELETE")
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/")))
 	log.Fatal(http.ListenAndServe(":8080", router))
-}
-
-// --- Authors ---
-
-func getAllAuthors(w http.ResponseWriter, r *http.Request) {
-	var authors []models.Author
-	db.Find(&authors)
-	json.NewEncoder(w).Encode(&authors)
-}
-
-func getAuthor(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var author models.Author
-	var paintings []models.Painting
-	db.First(&author, params["id"])
-
-	author.Paintings = paintings
-	json.NewEncoder(w).Encode(&author)
-}
-
-func createAuthor(w http.ResponseWriter, r *http.Request) {
-	var author models.Author
-	json.NewDecoder(r.Body).Decode(&author)
-	createdPerson := db.Create(&author)
-	err = createdPerson.Error
-	if err != nil {
-		json.NewEncoder(w).Encode(err)
-	} else {
-		json.NewEncoder(w).Encode(&author)
-	}
-}
-
-func deleteAuthor(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var author models.Author
-	db.First(&author, params["id"])
-	db.Delete(&author)
-	json.NewEncoder(w).Encode(&author)
-}
-
-// --- Paintings ---
-
-func getAllPaintings(w http.ResponseWriter, r *http.Request) {
-	var paintings []models.Painting
-	db.Find(&paintings)
-	json.NewEncoder(w).Encode(&paintings)
-}
-
-func getPainting(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var painting models.Painting
-	db.First(&painting, params["id"])
-	json.NewEncoder(w).Encode(&painting)
-}
-
-func createPainting(w http.ResponseWriter, r *http.Request) {
-	var book models.Painting
-	json.NewDecoder(r.Body).Decode(&book)
-	createdBook := db.Create(&book)
-	err = createdBook.Error
-	if err != nil {
-		json.NewEncoder(w).Encode(err)
-	} else {
-		json.NewEncoder(w).Encode(&book)
-	}
-}
-
-func deletePainting(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	var book models.Painting
-	db.First(&book, params["id"])
-	db.Delete(&book)
-	json.NewEncoder(w).Encode(&book)
 }
 

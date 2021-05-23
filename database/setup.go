@@ -7,6 +7,8 @@ import (
 
 var (
 
+	DB *gorm.DB
+
 	setup_paintings = []models.Painting {
 		{ Title: "Flower", Description: "123" },
 		{ Title: "Mountain", Description: "456" },
@@ -30,6 +32,8 @@ var (
 	}
 
 	setup_genre = []models.Genre {
+		
+		/*
 		{ Sign: "Port", Paintings: []models.Painting{ 
 				setup_paintings[3],
 				setup_paintings[4],
@@ -44,6 +48,11 @@ var (
 				setup_paintings[1],
 			},
 	 	},
+		 */
+
+		{ Sign: "Port" },
+		{ Sign: "Land" },
+		{ Sign: "Natu" },
 	}
 
 )
