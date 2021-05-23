@@ -7,13 +7,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
-
 
 func main() {
 	var dotEnv map[string]string
@@ -36,16 +34,13 @@ func main() {
 		fmt.Println("Successfully connected to database")
 	}
 
-	
 	database.DB.AutoMigrate(&models.Author{})
 	database.DB.AutoMigrate(&models.Painting{})
 	database.DB.AutoMigrate(&models.Genre{})
 
-
 	// WARNING: CALL ONLY THE FIRST TIME
 	// database.FillDatabase()
 
-	
 	router := mux.NewRouter()
 
 	router.HandleFunc("/authors", controllers.GetAllAuthors).Methods("GET")
@@ -63,4 +58,3 @@ func main() {
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/")))
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
-

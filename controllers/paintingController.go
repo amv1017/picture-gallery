@@ -9,6 +9,12 @@ import (
 	"github.com/gorilla/mux"
 )
 
+type Result struct {
+	PaintingID		int		`json:"id"`
+	PaintingTitle	string	`json:"title"`
+	PaintingUrl		string	`json:"url"`
+}
+
 func GetAllPaintings(w http.ResponseWriter, r *http.Request) {
 	var paintings []models.Painting
 	database.DB.Find(&paintings)
@@ -73,4 +79,3 @@ func DeletePainting(w http.ResponseWriter, r *http.Request) {
 	strconv.Itoa(int(painting.ID))+` AND title='`+painting.Title+`'`)
 
 }
-

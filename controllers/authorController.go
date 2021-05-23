@@ -3,10 +3,12 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"github.com/amv1017/picture-gallery/database"
 	"github.com/amv1017/picture-gallery/models"
 	"github.com/gorilla/mux"
 )
+
 
 func GetAllAuthors(w http.ResponseWriter, r *http.Request) {
 	var authors []models.Author
@@ -16,12 +18,9 @@ func GetAllAuthors(w http.ResponseWriter, r *http.Request) {
 
 func GetAuthor(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	var author models.Author
-	var paintings []models.Painting
-	database.DB.First(&author, params["id"])
-
-	author.Paintings = paintings
-	json.NewEncoder(w).Encode(&author)
+	var result []Result
+	database.DB.Raw("SELECT painting_id, painting_title, painting_url FROM author_paintings WHERE author_id = "+params["id"]).Scan(&result)
+	json.NewEncoder(w).Encode(&result)
 }
 
 func CreateAuthor(w http.ResponseWriter, r *http.Request) {
@@ -40,6 +39,12 @@ func DeleteAuthor(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	var author models.Author
 	database.DB.First(&author, params["id"])
-	database.DB.Delete(&author)
+
+	database.DB.Exec(`DELETE FROM public.author_paintings WHERE author_id=`+
+	strconv.Itoa(int(author.ID))+` AND author_name='`+author.Name+`'`)
+
+	database.DB.Exec(`DELETE FROM public.authors WHERE id=`+
+	strconv.Itoa(int(author.ID))+` AND name='`+author.Name+`'`)
+
 	json.NewEncoder(w).Encode(&author)
 }
