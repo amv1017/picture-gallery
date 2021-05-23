@@ -43,7 +43,6 @@ func main() {
 
 
 	// WARNING: CALL ONLY THE FIRST TIME
-	
 	database.FillDatabase()
 
 	
