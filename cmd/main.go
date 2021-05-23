@@ -55,6 +55,6 @@ func main() {
 
 	router.HandleFunc("/genre/{id}", controllers.GetGenre).Methods("GET")
 
-	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./client/")))
+	router.PathPrefix("/").Handler(http.FileServer(http.Dir("../client")))
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

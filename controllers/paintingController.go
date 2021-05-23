@@ -16,12 +16,24 @@ type Result struct {
 }
 
 func GetAllPaintings(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
 	var paintings []models.Painting
 	database.DB.Find(&paintings)
 	json.NewEncoder(w).Encode(&paintings)
 }
 
 func GetPainting(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
 	params := mux.Vars(r)
 	var painting models.Painting
 	database.DB.First(&painting, params["id"])
@@ -29,6 +41,12 @@ func GetPainting(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreatePainting(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
 	var painting models.Painting
 	json.NewDecoder(r.Body).Decode(&painting)
 	result := database.DB.Create(&painting)
@@ -57,6 +75,12 @@ func CreatePainting(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeletePainting(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
 	params := mux.Vars(r)
 	var painting models.Painting
 	database.DB.First(&painting, params["id"])
