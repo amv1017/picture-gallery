@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from 'react'
-import './App.css';
 import PaintingView from './PaintingView';
 
 function App() {
@@ -22,8 +21,12 @@ const fetchPaintings = async () => {
 }
 
   return (
-    <div className="App">
+    <div className="container mx-auto">
+      
 
+      <h1 className="text-3xl">
+        Paintings
+      </h1>
       {paintings.length > 0 ?
         (<PaintingView gallery={paintings} />) :
         ('No exhibits found')

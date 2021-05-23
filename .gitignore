@@ -1,4 +1,4 @@
-.env
+cmd/.env
 art-gallery-view/node_modules
 art-gallery-view/.pnp
 art-gallery-view/.pnp.js
