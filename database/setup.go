@@ -1,8 +1,7 @@
 package database
 
 import (
-	// "strconv"
-
+	"strconv"
 	"github.com/amv1017/picture-gallery/models"
 	"gorm.io/gorm"
 )
@@ -125,7 +124,6 @@ var (
 			Url: "https://uploads4.wikiart.org/images/ilya-repin/apples-and-leaves-1879.jpg!Large.jpg",
 		},
 
-
 	}
 
 	sa = []models.Author { 
@@ -202,7 +200,6 @@ var (
 
 func FillDatabase() {
 
-
 	for i := range sg {
 		DB.Create(&sg[i])
 	}
@@ -211,25 +208,20 @@ func FillDatabase() {
 		DB.Create(&sa[i])
 	}
 
-/*
-
-	DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[0].ID))+`,'`+sg[0].Sign+`',`+strconv.Itoa(int(1))+`,'`+sp[0].Title+`')`)
-	DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[0].ID))+`,'`+sg[0].Sign+`',`+strconv.Itoa(int(2))+`,'`+sp[1].Title+`')`)
-
-*/
-
-/*
-	for i := 0; i < 9; i++ {
-		DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[0].ID))+`,'`+sg[0].Sign+`',`+strconv.Itoa(int(i+1))+`,'`+sp[i].Title+`')`)
+	gb := []int{1,2,3,8,9,10,11,13,14}
+	for i := range gb {
+		DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[0].ID))+`,'`+sg[0].Sign+`',`+strconv.Itoa(gb[i])+`,'`+sp[i].Title+`')`)
 	}
-*/
 
+	gb = []int{4,5,6,15,17,18,19}
+	for i := range gb {
+		DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[1].ID))+`,'`+sg[1].Sign+`',`+strconv.Itoa(gb[i])+`,'`+sp[i+9].Title+`')`)
+	}
 
-
-
-
-
-
+	gb = []int{7,12,16,21}
+	for i := range gb {
+		DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[2].ID))+`,'`+sg[2].Sign+`',`+strconv.Itoa(gb[i])+`,'`+sp[i+16].Title+`')`)
+	}
 
 }
 
