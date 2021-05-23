@@ -2,11 +2,13 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"strconv"
+
 	"github.com/amv1017/picture-gallery/database"
 	"github.com/amv1017/picture-gallery/models"
 	"github.com/gorilla/mux"
-	"fmt"
 )
 
 func GetAllPaintings(w http.ResponseWriter, r *http.Request) {
@@ -35,7 +37,18 @@ func CreatePainting(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println(painting)
+
+	var genre models.Genre
 	
+	database.DB.Model(&models.Genre{}).First(&genre,"sign",painting.Genre)
+
+	fmt.Println(genre)
+
+	database.DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+
+	strconv.Itoa(int(genre.ID))+`,'`+
+	genre.Sign+`',`+strconv.Itoa(int(painting.ID))+`,'`+painting.Title+`')`)
+	
+
 }
 
 func DeletePainting(w http.ResponseWriter, r *http.Request) {

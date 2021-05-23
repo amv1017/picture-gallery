@@ -5,4 +5,5 @@ type Painting struct {
 	Title		string	`json:"title" gorm:"primary_key"`
 	Description	string	`json:"description"`
 	Url			string	`json:"url"`
+	Genre		string	`json:"genre" gorm:"-"`
 }
