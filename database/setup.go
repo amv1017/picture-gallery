@@ -218,7 +218,7 @@ func FillDatabase() {
 		DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[1].ID))+`,'`+sg[1].Sign+`',`+strconv.Itoa(gb[i])+`,'`+sp[i+9].Title+`')`)
 	}
 
-	gb = []int{7,12,16,21}
+	gb = []int{7,12,16,21,20}
 	for i := range gb {
 		DB.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title) VALUES (`+strconv.Itoa(int(sg[2].ID))+`,'`+sg[2].Sign+`',`+strconv.Itoa(gb[i])+`,'`+sp[i+16].Title+`')`)
 	}

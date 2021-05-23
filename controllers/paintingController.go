@@ -6,6 +6,7 @@ import (
 	"github.com/amv1017/picture-gallery/database"
 	"github.com/amv1017/picture-gallery/models"
 	"github.com/gorilla/mux"
+	"fmt"
 )
 
 func GetAllPaintings(w http.ResponseWriter, r *http.Request) {
@@ -32,6 +33,9 @@ func CreatePainting(w http.ResponseWriter, r *http.Request) {
 	} else {
 		json.NewEncoder(w).Encode(&painting)
 	}
+
+	fmt.Println(painting)
+	
 }
 
 func DeletePainting(w http.ResponseWriter, r *http.Request) {

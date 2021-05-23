@@ -43,12 +43,10 @@ func main() {
 
 
 	// WARNING: CALL ONLY THE FIRST TIME
-	database.FillDatabase()
+	// database.FillDatabase()
 
 	
-	var genre models.Genre
-	database.DB.First(&genre).Where("sign","Port")
-	fmt.Println(genre)
+
 
 	/*
 	db.Exec(`INSERT INTO public.genre_paintings (genre_id,genre_sign,painting_id,painting_title)
