@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const Exhibit = ({ museumid, onDelete }) => {
+const Exhibit = ({ museumid }) => {
 
 
 
@@ -14,19 +14,20 @@ const Exhibit = ({ museumid, onDelete }) => {
     }, [])
     
     const fetchPaintings = async () => {
-        const res = await fetch(`http://localhost:8080/painting/${museumid}`,{method:"GET"});
+        const res = await fetch(`http://localhost:8080/painting/${museumid}`,{method:'GET'});
         const data = await res.json();
         return data;
     }
 
-    const remove = () => {
+    const remove = async () => {
+        await fetch(`http://localhost:8080/painting/${museumid}`,{ method:'DELETE'});
         console.log('removing')
     }
 
     return(
         <div>
             <div className="flex justify-end">
-                <button className="" onClick={onDelete}>Delete This Exhibit</button>
+                <button className="" onClick={() => remove()}>Delete This Exhibit</button>
             </div>
     <div className="flex flex-col justify-center" >
        

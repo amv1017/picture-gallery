@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
+	"github.com/gorilla/handlers"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -43,6 +44,7 @@ func main() {
 
 	router := mux.NewRouter()
 
+
 	router.HandleFunc("/authors", controllers.GetAllAuthors).Methods("GET")
 	router.HandleFunc("/author/{id}", controllers.GetAuthor).Methods("GET")
 	router.HandleFunc("/authors", controllers.CreateAuthor).Methods("POST")
@@ -56,5 +58,12 @@ func main() {
 	router.HandleFunc("/genre/{id}", controllers.GetGenre).Methods("GET")
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("../client")))
-	log.Fatal(http.ListenAndServe(":8080", router))
+
+
+	
+	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
+	originsOk := handlers.AllowedOrigins([]string{"*"})
+	methodsOk := handlers.AllowedMethods([]string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodOptions})
+
+	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(originsOk, headersOk, methodsOk)(router)))
 }

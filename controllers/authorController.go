@@ -12,35 +12,22 @@ import (
 
 func GetAllAuthors(w http.ResponseWriter, r *http.Request) {
 
-	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-
 	var authors []models.Author
 	database.DB.Find(&authors)
 	json.NewEncoder(w).Encode(&authors)
+
 }
 
 func GetAuthor(w http.ResponseWriter, r *http.Request) {
-
-	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
 	var result []Result
 	database.DB.Raw("SELECT painting_id, painting_title, painting_url FROM author_paintings WHERE author_id = "+params["id"]).Scan(&result)
 	json.NewEncoder(w).Encode(&result)
+
 }
 
 func CreateAuthor(w http.ResponseWriter, r *http.Request) {
-
-	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	var author models.Author
 	json.NewDecoder(r.Body).Decode(&author)
@@ -51,14 +38,10 @@ func CreateAuthor(w http.ResponseWriter, r *http.Request) {
 	} else {
 		json.NewEncoder(w).Encode(&author)
 	}
+
 }
 
 func DeleteAuthor(w http.ResponseWriter, r *http.Request) {
-
-	w.Header().Set("Content-Type", "application/json; charset=utf-8")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "DELETE")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
 	var author models.Author
@@ -71,4 +54,5 @@ func DeleteAuthor(w http.ResponseWriter, r *http.Request) {
 	strconv.Itoa(int(author.ID))+` AND name='`+author.Name+`'`)
 
 	json.NewEncoder(w).Encode(&author)
+
 }

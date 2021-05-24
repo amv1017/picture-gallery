@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import PaintingView from './PaintingView'
+import Screen from './Screen'
 
 const Paintings = (props) => {
 
@@ -26,7 +26,7 @@ const Paintings = (props) => {
     return(
         <div class="w-full max-w-6xl mx-auto px-4 border-2 border-grey-600">
         
-        <PaintingView gallery={paintings} />
+        <Screen gallery={paintings} />
         
         </div>
     )

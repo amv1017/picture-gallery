@@ -1,4 +1,4 @@
-const PreView = ({ paint, onClick }) => {
+const Palette = ({ paint, onClick }) => {
     return(
     <div className="" onClick={onClick}>
        
@@ -10,4 +10,4 @@ const PreView = ({ paint, onClick }) => {
     )
 }
 
-export default PreView
+export default Palette
