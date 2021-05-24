@@ -1,9 +1,10 @@
 const PreView = ({ paint }) => {
     return(
-    <div className="grid grid-cols-2 gap-1">
+    <div className="">
+       
        
             <img src={paint.url} />
-            <p className="bg-gray-300 place-self-center">{paint.description}</p>
+            
        
     </div>
     )

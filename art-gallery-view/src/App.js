@@ -1,39 +1,33 @@
-import React, {useState,useEffect} from 'react'
-import PaintingView from './PaintingView';
+import React, { useState, useEffect } from 'react'
+import Paintings from './Paintings'
+import { BrowserRouter, Route } from 'react-router-dom'
+import SidebarEx from './SidebarEx';
+import SBNext from './SBNext';
+import SideBar from './SideBar';
+import NavBar from './NavBar';
+import Menu from './Menu'
 
 function App() {
 
-  const [paintings, setPaintings]  = useState(
-    []
-)
-
-useEffect(() => {
-    const getPaintings = async () => {
-      setPaintings(await fetchPaintings())
-    }
-    getPaintings();
-}, [])
-
-const fetchPaintings = async () => {
-    const res = await fetch('http://localhost:8080/paintings',{method:"GET"});
-    const data = await res.json();
-    return data;
-}
 
   return (
     <div className="container mx-auto">
       
+      <BrowserRouter>
+      <NavBar />
+      <div className="flex flex-col md:flex-row">
+        
+        <SideBar />
+        <Paintings />
+        <Route exact path='/author/:id' component={Paintings} />
+      </div>
 
-      <h1 className="text-3xl">
-        Paintings
-      </h1>
-      {paintings.length > 0 ?
-        (<PaintingView gallery={paintings} />) :
-        ('No exhibits found')
+      
 
-      }
 
+      </BrowserRouter>
     </div>
+    
   );
 }
 
