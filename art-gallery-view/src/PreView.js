@@ -1,8 +1,8 @@
-const PreView = ({ paint }) => {
+const PreView = ({ paint, onClick }) => {
     return(
-    <div className="">
+    <div className="" onClick={onClick}>
        
-       
+    
             <img src={paint.url} />
             
        

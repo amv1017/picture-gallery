@@ -1,4 +1,5 @@
 import PreView from './PreView'
+import Exhibit from './Exhibit'
 import React, { useState, useEffect } from 'react'
 
 const PaintingView = ({gallery}) => {
@@ -16,7 +17,7 @@ const PaintingView = ({gallery}) => {
         <div class="grid grid-cols-1 gap-4">
         <div onClick={() => setShowOne(!showOne)}>
         
-            <PreView paint={gallery[ind]} />
+                <Exhibit url={gallery[ind].url} desc={gallery[ind].description} />
             </div>
         </div> 
         
@@ -26,9 +27,14 @@ const PaintingView = ({gallery}) => {
         
         { gallery.map((i) => (
             <div onClick={() => { setShowOne(!showOne) }}>
-                <PreView paint={i} onClick={() => { setInd(i) }} />
+                <PreView paint={i} onClick={() => { setInd(gallery.indexOf(i)) }} />
+                {console.log(gallery)}
             </div>
-        )) }
+        )) 
+
+        
+
+        }
         </div>
         
 
