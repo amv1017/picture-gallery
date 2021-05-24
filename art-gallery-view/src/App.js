@@ -21,6 +21,7 @@ function App() {
         
         <Route exact path='/new' component={NewExhibit} />
         <Route exact path='/:section/:id' component={Paintings} />
+        
       </div>
 
       

@@ -1,34 +1,30 @@
 package main
 
 import (
-	"github.com/amv1017/picture-gallery/controllers"
-	"github.com/amv1017/picture-gallery/models"
-	"github.com/amv1017/picture-gallery/database"
 	"fmt"
 	"log"
 	"net/http"
-	"github.com/gorilla/mux"
+	"github.com/amv1017/picture-gallery/controllers"
+	"github.com/amv1017/picture-gallery/database"
+	"github.com/amv1017/picture-gallery/models"
 	"github.com/gorilla/handlers"
+	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"github.com/lib/pq"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func main() {
+	
 	var dotEnv map[string]string
 	dotEnv, err := godotenv.Read()
 	if err != nil {
 		log.Fatal("Failed to get environment variables")
 	}
 
-	dsn :=	"host="+dotEnv["HOST"]+
-			" user="+dotEnv["USER"]+
-			" password="+dotEnv["PASSWORD"]+
-			" dbname="+dotEnv["DBNAME"]+
-			" port="+dotEnv["PORT"]+
-			" sslmode=disable"
-
-	database.DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	pgURL, err := pq.ParseURL(dotEnv["ELEPHANTSQL_URL"])
+	database.DB, err = gorm.Open(postgres.Open(pgURL), &gorm.Config{})
 	if err != nil {
 		log.Fatal(err)
 	} else {
@@ -39,7 +35,7 @@ func main() {
 	database.DB.AutoMigrate(&models.Painting{})
 	database.DB.AutoMigrate(&models.Genre{})
 
-	// WARNING: CALL ONLY THE FIRST TIME
+	// WARNING: CALL ONLY THE FIRST TIME WITH EMPTY DATABASE
 	// database.FillDatabase()
 
 	router := mux.NewRouter()
