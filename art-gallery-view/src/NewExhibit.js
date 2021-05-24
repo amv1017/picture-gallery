@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const NewExhibit = () => {
 
@@ -12,7 +13,15 @@ const NewExhibit = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        send()
+        axios.post('http://localhost:8080/paintings',
+        {
+            'title': title,
+            'description': description,
+            'url': url,
+            'genre': genre,
+            'author': author
+        }
+        )
 
         /*
         setTitle('')
@@ -21,10 +30,11 @@ const NewExhibit = () => {
         setGenre('')
         setAuthor('')
         */
-       
+
     };
 
 
+    /*
     const send = async () => {
         const data = JSON.stringify({
             'title': title,
@@ -46,6 +56,7 @@ const NewExhibit = () => {
         
         
     }
+    */
 
 
     return (
