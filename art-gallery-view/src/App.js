@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import SideBar from './SideBar';
 import NavBar from './NavBar';
 import NewExhibit from './NewExhibit'
+import Welcome from './Welcome'
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         
         <Route exact path='/new' component={NewExhibit} />
         <Route exact path='/:section/:id' component={Paintings} />
-        
+        <Route exact path='/' component={Welcome} />
       </div>
 
       
