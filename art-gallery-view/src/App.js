@@ -19,7 +19,7 @@ function App() {
         
         <SideBar />
         
-        <Route exact path='/author/:id' component={Paintings} />
+        <Route exact path='/:section/:id' component={Paintings} />
       </div>
 
       

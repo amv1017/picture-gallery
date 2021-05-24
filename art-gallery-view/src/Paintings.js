@@ -3,8 +3,6 @@ import PaintingView from './PaintingView'
 
 const Paintings = (props) => {
 
-    
-
     const [paintings, setPaintings]  = useState(
         []
     )
@@ -17,8 +15,7 @@ const Paintings = (props) => {
     }, [])
     
     const fetchPaintings = async () => {
-        
-        const res = await fetch(`http://localhost:8080/author/${props.match.params.id}`,{method:"GET"});
+        const res = await fetch(`http://localhost:8080/${props.match.params.section}/${props.match.params.id}`,{method:"GET"});
         const data = await res.json();
         return data;
     }
