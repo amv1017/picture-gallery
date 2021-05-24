@@ -24,15 +24,17 @@ const Exhibit = ({ museumid }) => {
 
     return(
         <div>
-            <div className="flex justify-end">
-                <button className="" onClick={() => remove()}>Delete This Exhibit</button>
-            </div>
+            
     <div className="flex flex-col justify-center" >
 
 
-        <img className="object-contain md:object-scale-down" src={paintings.url} />
-        <p className="text-blue-900">{paintings.title}</p>
+        <img className="object-contain h-screen w-full" src={paintings.url} />
+        <p className="text-blue-900 text-4xl text-center mb-4">{paintings.title}</p>
         <p className="text-blue-900">{paintings.description}</p>
+
+        <div className="flex justify-end">
+                <button className="bg-red-400 rounded-md" onClick={() => remove()}>Delete This Exhibit</button>
+            </div>
 
     </div>
     </div>

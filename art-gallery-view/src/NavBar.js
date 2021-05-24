@@ -1,15 +1,15 @@
 import React from "react";
 function NavBar() {
     return (
-        <div className="flex flex-wrap items-center">
-            <div className="flex flex-shrink md:w-1/3 justify-center md:justify-start text-black">Museum</div>
-
-                <ul className="flex flex-row md:justify-end">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/new">New</a></li>
+        <div className="flex items-center h-8 bg-gradient-to-r from-purple-400 via-cyan-500 to-blue-500">
+            <div className="ml-16 text-black">ART GALLERY</div>
+            
+                <ul className="flex flex-auto justify-end pr-40">
+                    <li className="text-gray-100 m-9"><a href="/">Home</a></li>
+                    <li className="text-gray-100 m-9"><a href="/new">New</a></li>
                 </ul>
-
-            </div>
+                </div>
+            
         
     );
 }

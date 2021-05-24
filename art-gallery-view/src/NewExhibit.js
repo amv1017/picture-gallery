@@ -43,9 +43,7 @@ const NewExhibit = () => {
       
             <div className="flex flex-col">
 
-                <div className="">
-
-                </div>
+                
                 <form className="ml-40 mt-16 flex flex-col items-right" onSubmit={handleFormSubmit}>
 
                     <div>
@@ -113,7 +111,7 @@ const NewExhibit = () => {
 
                     </div>
                 </form>
-            <div>
+            <div className="ml-40 mt-16 flex flex-col items-right">
                 <ul>
                     Example
                     <li>Title: Black Square</li>
