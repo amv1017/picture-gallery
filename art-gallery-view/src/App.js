@@ -18,7 +18,7 @@ function App() {
       <div className="flex flex-col md:flex-row">
         
         <SideBar />
-        <Paintings />
+        
         <Route exact path='/author/:id' component={Paintings} />
       </div>
 

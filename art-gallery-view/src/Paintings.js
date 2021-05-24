@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import PaintingView from './PaintingView'
 
-const Paintings = ({path}) => {
+const Paintings = (props) => {
+
+    
 
     const [paintings, setPaintings]  = useState(
         []
@@ -15,8 +17,8 @@ const Paintings = ({path}) => {
     }, [])
     
     const fetchPaintings = async () => {
-        console.log("Path: ",path)
-        const res = await fetch(path,{method:"GET"});
+        
+        const res = await fetch(`http://localhost:8080/author/${props.match.params.id}`,{method:"GET"});
         const data = await res.json();
         return data;
     }

@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 const SideBar = () => {
 
 
-    const [authors, setPaintings]  = useState(
-        []
-    )
+    const [authors, setAuthors]  = useState([])
+    
+
     
     useEffect(() => {
         const getPaintings = async () => {
-          setPaintings(await fetchPaintings())
+          setAuthors(await fetchPaintings())
         }
         getPaintings();
     }, [])
@@ -20,16 +20,25 @@ const SideBar = () => {
         return data;
     }
     
-
-
+    
 
     return (
+        <div>
         <div className="flex flex-col items-center">
                     { authors.map((i) => (
             <div>
-                <Link to={'/author/'+i.id}>{i.name}</Link>
+                <a href={'/author/'+i.id}>{i.name}</a>
             </div>
             )) }
+        </div>
+
+        <div className="mb-3"></div>
+
+        <div className="flex flex-col items-center">
+            <a href={'/genre/1'}>Landscape</a>
+            <a href={'/genre/2'}>Portrait</a>
+            <a href={'/genre/3'}>Still Life</a>
+        </div>
         </div>
     );
 }
