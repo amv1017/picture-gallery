@@ -14,16 +14,17 @@ const PaintingView = ({gallery}) => {
         showOne ? 
 
         
-        <div class="grid grid-cols-1 gap-4">
+        <div className="grid grid-cols-1 gap-4">
         <div onClick={() => setShowOne(!showOne)}>
         
-                <Exhibit url={gallery[ind].url} desc={gallery[ind].description} />
+                <Exhibit museumid={gallery[ind].id} />
+                {console.log("viewind: ",ind," museumid: ",gallery[ind].id)}
             </div>
-        </div> 
+        </div>
         
         : 
         
-        <div class="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4">
         
         { gallery.map((i) => (
             <div onClick={() => { setShowOne(!showOne) }}>

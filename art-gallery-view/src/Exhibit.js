@@ -1,12 +1,42 @@
-const Exhibit = ({ title, author, url, desc }) => {
+import React, { useState, useEffect } from 'react'
+
+const Exhibit = ({ museumid, onDelete }) => {
+
+
+
+    const [paintings, setPaintings]  = useState({})
+    
+    useEffect(() => {
+        const getPaintings = async () => {
+          setPaintings(await fetchPaintings())
+        }
+        getPaintings();
+    }, [])
+    
+    const fetchPaintings = async () => {
+        const res = await fetch(`http://localhost:8080/painting/${museumid}`,{method:"GET"});
+        const data = await res.json();
+        return data;
+    }
+
+    const remove = () => {
+        console.log('removing')
+    }
+
     return(
-    <div className="" >
+        <div>
+            <div className="flex justify-end">
+                <button className="" onClick={onDelete}>Delete This Exhibit</button>
+            </div>
+    <div className="flex flex-col justify-center" >
        
     
-        <img src={url} />
-        <p>{desc}</p>
+        <img className="object-contain md:object-scale-down" src={paintings.url} />
+        <p className="text-blue-900">{paintings.title}</p>
+        <p className="text-blue-900">{paintings.description}</p>
             
        
+    </div>
     </div>
     )
 }
