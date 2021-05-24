@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+
 const SideBar = () => {
 
-
     const [authors, setAuthors]  = useState([])
-    
 
-    
     useEffect(() => {
         const getPaintings = async () => {
           setAuthors(await fetchPaintings())
         }
         getPaintings();
     }, [])
-    
+
     const fetchPaintings = async () => {
         const res = await fetch('http://localhost:8080/authors',{method:"GET"});
         const data = await res.json();
         return data;
     }
-    
-    
+
 
     return (
         <div>

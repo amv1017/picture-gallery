@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 
 const NewExhibit = () => {
-
 
     const [title,setTitle] = useState('');
     const [description,setDescription] = useState('');
@@ -13,28 +11,16 @@ const NewExhibit = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        axios.post('http://localhost:8080/paintings',
-        {
-            'title': title,
-            'description': description,
-            'url': url,
-            'genre': genre,
-            'author': author
-        }
-        )
+        send()
 
-        /*
         setTitle('')
         setDescription('')
         setUrl('')
         setGenre('')
         setAuthor('')
-        */
 
     };
 
-
-    /*
     const send = async () => {
         const data = JSON.stringify({
             'title': title,
@@ -44,20 +30,14 @@ const NewExhibit = () => {
             'author': author
         })
         console.log(data)
-        const response = await fetch('http://localhost:8080/paintings/', {
+        await fetch('http://localhost:8080/paintings', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: data
         })
-        const result = await response.json
-        console.log(JSON.stringify(result))
-        
-        
     }
-    */
-
 
     return (
       
@@ -133,6 +113,17 @@ const NewExhibit = () => {
 
                     </div>
                 </form>
+            <div>
+                <ul>
+                    Example
+                    <li>Title: Black Square</li>
+                    <li>Author: Kazimir Malevich</li>
+                    <li>Genre: Still Life</li>
+                    <li>Description: Masterpiece...</li>
+                    <li>URL: https://img.gazeta.ru/files3/907/7888907/malevich21_-pic905-895x505-1560.jpg</li>
+                </ul>
+
+            </div>
             </div>
     )
 }

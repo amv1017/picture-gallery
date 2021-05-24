@@ -7,7 +7,7 @@ function NavBar() {
                 <ul className="flex flex-row md:justify-end">
                     <li>Home</li>
                     <li>About</li>
-                    <li>Contacts</li>
+                    <li><a href="/new">New</a></li>
                 </ul>
 
             </div>

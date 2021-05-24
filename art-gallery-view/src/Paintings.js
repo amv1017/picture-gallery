@@ -19,9 +19,6 @@ const Paintings = (props) => {
         const data = await res.json();
         return data;
     }
-    
-
-
 
     return(
         <div class="w-full max-w-6xl mx-auto px-4 border-2 border-grey-600">
