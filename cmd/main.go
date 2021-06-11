@@ -16,7 +16,7 @@ import (
 )
 
 func main() {
-	
+
 	var dotEnv map[string]string
 	dotEnv, err := godotenv.Read()
 	if err != nil {
@@ -40,23 +40,20 @@ func main() {
 
 	router := mux.NewRouter()
 
+	router.HandleFunc("/api/authors", controllers.GetAllAuthors).Methods("GET")
+	router.HandleFunc("/api/author/{id}", controllers.GetAuthor).Methods("GET")
+	router.HandleFunc("/api/authors", controllers.CreateAuthor).Methods("POST")
+	router.HandleFunc("/api/author/{id}", controllers.DeleteAuthor).Methods("DELETE")
 
-	router.HandleFunc("/authors", controllers.GetAllAuthors).Methods("GET")
-	router.HandleFunc("/author/{id}", controllers.GetAuthor).Methods("GET")
-	router.HandleFunc("/authors", controllers.CreateAuthor).Methods("POST")
-	router.HandleFunc("/author/{id}", controllers.DeleteAuthor).Methods("DELETE")
+	router.HandleFunc("/api/paintings", controllers.GetAllPaintings).Methods("GET")
+	router.HandleFunc("/api/painting/{id}", controllers.GetPainting).Methods("GET")
+	router.HandleFunc("/api/paintings", controllers.CreatePainting).Methods("POST")
+	router.HandleFunc("/api/painting/{id}", controllers.DeletePainting).Methods("DELETE")
 
-	router.HandleFunc("/paintings", controllers.GetAllPaintings).Methods("GET")
-	router.HandleFunc("/painting/{id}", controllers.GetPainting).Methods("GET")
-	router.HandleFunc("/paintings", controllers.CreatePainting).Methods("POST")
-	router.HandleFunc("/painting/{id}", controllers.DeletePainting).Methods("DELETE")
-
-	router.HandleFunc("/genre/{id}", controllers.GetGenre).Methods("GET")
+	router.HandleFunc("/api/genre/{id}", controllers.GetGenre).Methods("GET")
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("../client")))
 
-
-	
 	headersOk := handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
 	methodsOk := handlers.AllowedMethods([]string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete, http.MethodOptions})
